@@ -104,6 +104,11 @@ def create_regions(world):
         create_interior_region('GF Great Bay', ['Great Bay GF Reward'], ['Great Bay Fairy Ledge']),
 
         create_interior_region('GF Stone Tower', ['Stone Tower GF Reward'], ['Ikana Canyon'])
+
+        create_dungeon_region('The Moon Lobby',
+            ['Odolwa Child Trial Reward', 'Goht Child Trial Reward', 'Gyorg Child Trial Reward', 'Twinmold Child Trial Reward'],
+            ['Odolwa Child Trial', 'Goht Child Trial', 'Gyorg Child Trial', 'Twinmold Child Trial', 'Majora\'s Mask Child']
+        )
     ]
     world.intialize_regions()
 
