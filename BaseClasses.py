@@ -339,12 +339,14 @@ class CollectionState(object):
     def is_adult(self):
         return self.has('Master Sword')
 
+    def can_child_melee_attack(self):
+        return self.has_sticks() or self.has('Kokiri Sword')
+
     def can_child_attack(self):
-        return  self.has_slingshot() or \
+        return  self.can_child_melee_attack() or \
+                self.has_slingshot() or \
                 self.has('Boomerang') or \
-                self.has_sticks() or \
                 self.has_explosives() or \
-                self.has('Kokiri Sword') or \
                 (self.has('Dins Fire') and self.has('Magic Meter'))
 
     def can_stun_deku(self):

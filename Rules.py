@@ -98,9 +98,9 @@ def global_rules(world):
     set_rule(world.get_location('50 Gold Skulltulla Reward'), lambda state: (expected_skulltulas >= 50) and state.has('Gold Skulltulla Token', 50) and state.guarantee_hint())
     set_rule(world.get_location('Heart Piece Grave Chest'), lambda state: state.can_play('Suns Song'))
     set_rule(world.get_entrance('Composer Grave'), lambda state: state.can_play('Zeldas Lullaby'))
-    set_rule(world.get_location('Song from Composer Grave'), lambda state: state.is_adult() or (state.has_slingshot() or state.has('Boomerang') or state.has_sticks() or state.has_explosives() or state.has('Kokiri Sword')))
+    set_rule(world.get_location('Song from Composer Grave'), lambda state: state.is_adult() or (state.has_slingshot() or state.has('Boomerang') or state.has_explosives() or state.can_child_melee_attack()))
     set_rule(world.get_location('Composer Grave Chest'), lambda state: state.has_fire_source())
-    set_rule(world.get_entrance('Bottom of the Well'), lambda state: state.can_play('Song of Storms') and (world.dungeon_mq['BW'] or (state.has_slingshot() or state.has_sticks() or state.has_explosives() or state.has('Kokiri Sword') or (state.has('Dins Fire') and state.has('Magic Meter')))))
+    set_rule(world.get_entrance('Bottom of the Well'), lambda state: state.can_play('Song of Storms') and (world.dungeon_mq['BW'] or (state.has_slingshot() or state.has_explosives() or state.can_child_melee_attack() or (state.has('Dins Fire') and state.has('Magic Meter')))))
     set_rule(world.get_entrance('Death Mountain Entrance'), lambda state: state.has('Zeldas Letter') or state.is_adult() or world.open_kakariko)
     # In the future, 'Buy Fairy\'s Spirit' should be changed to has_fairy() so that other potential sources of fairies could be added.
     set_rule(world.get_location('DM Trail Freestanding PoH'), lambda state: world.open_kakariko or (world.difficulty != 'ohko') or state.has('Zeldas Letter') or state.can_blast_or_smash() or ((state.has('Dins Fire') or state.has('Nayrus Love')) and state.has('Magic Meter')) or state.has_bow() or state.has('Progressive Strength Upgrade') or state.has('Buy Fairy\'s Spirit') or state.has('Hover Boots'))
@@ -219,7 +219,7 @@ def global_rules(world):
     set_rule(world.get_entrance('Lost Woods Generic Grotto'), lambda state: state.can_blast_or_smash())
     set_rule(world.get_entrance('Lost Woods Sales Grotto'), lambda state: state.has_explosives() or (state.has('Hammer') and state.is_adult() and (state.can_play('Minuet of Forest') or state.can_play('Sarias Song'))))
     set_rule(world.get_entrance('Front of Meadow Grotto'), lambda state: state.has_explosives() or (state.has('Hammer') and state.is_adult() and (state.can_play('Minuet of Forest') or state.can_play('Sarias Song'))))
-    set_rule(world.get_entrance('Meadow Gate'), lambda state: state.has_slingshot() or state.has_sticks() or state.has_explosives() or state.has('Kokiri Sword') or (state.has('Dins Fire') and state.has('Magic Meter')))
+    set_rule(world.get_entrance('Meadow Gate'), lambda state: state.has_slingshot() or state.has_explosives() or state.can_child_melee_attack() or (state.has('Dins Fire') and state.has('Magic Meter')))
     set_rule(world.get_entrance('Remote Southern Grotto'), lambda state: state.can_blast_or_smash())
     set_rule(world.get_entrance('Field Near Lake Inside Fence Grotto'), lambda state: state.can_blast_or_smash())
     set_rule(world.get_entrance('Field Valley Grotto'), lambda state: state.can_blast_or_smash())
@@ -228,7 +228,7 @@ def global_rules(world):
     set_rule(world.get_entrance('Field Kakariko Grotto'), lambda state: state.can_blast_or_smash())
     set_rule(world.get_entrance('Field North Lon Lon Grotto'), lambda state: state.can_blast_or_smash())
     set_rule(world.get_entrance('Castle Storms Grotto'), lambda state: state.can_play('Song of Storms'))
-    set_rule(world.get_entrance('Kakariko Bombable Grotto'), lambda state: state.can_blast_or_smash() and (state.is_adult() or (state.has_sticks() or state.has('Kokiri Sword') or (state.has('Dins Fire') and state.has('Magic Meter')))))
+    set_rule(world.get_entrance('Kakariko Bombable Grotto'), lambda state: state.can_blast_or_smash() and (state.is_adult() or (state.can_child_melee_attack() or (state.has('Dins Fire') and state.has('Magic Meter')))))
     set_rule(world.get_entrance('Mountain Bombable Grotto'), lambda state: state.can_blast_or_smash())
     set_rule(world.get_entrance('Mountain Storms Grotto'), lambda state: state.can_play('Song of Storms'))
     set_rule(world.get_entrance('Top of Crater Grotto'), lambda state: state.can_blast_or_smash())
@@ -236,10 +236,10 @@ def global_rules(world):
     set_rule(world.get_entrance('Zora River Plateau Bombable Grotto'), lambda state: state.can_blast_or_smash())
     set_rule(world.get_location('Tektite Grotto Freestanding PoH'), lambda state: state.has('Progressive Scale', 2) or (state.has('Iron Boots') and state.is_adult()))
     set_rule(world.get_location('GS Kokiri Know It All House'), lambda state: state.nighttime() and (state.can_leave_forest() or state.can_play('Suns Song')) and state.can_child_attack())
-    set_rule(world.get_location('GS Kokiri Bean Patch'), lambda state: state.has_bottle() and state.can_child_attack() and (state.can_leave_forest() or state.has('Kokiri Sword') or state.has_sticks() or state.has('Boomerang') or state.has_explosives() or state.has('Buy Bottle Bug')))
+    set_rule(world.get_location('GS Kokiri Bean Patch'), lambda state: state.has_bottle() and state.can_child_attack() and (state.can_leave_forest() or state.can_child_melee_attack() or state.has('Boomerang') or state.has_explosives() or state.has('Buy Bottle Bug')))
     set_rule(world.get_location('GS Kokiri House of Twins'), lambda state: state.has('Progressive Hookshot') and state.is_adult() and state.nighttime())
-    set_rule(world.get_location('GS Lost Woods Bean Patch Near Bridge'), lambda state: state.has_bottle() and state.can_child_attack() and (state.can_leave_forest() or state.has('Kokiri Sword') or state.has_sticks() or state.has('Boomerang') or state.has_explosives() or state.has('Buy Bottle Bug')))
-    set_rule(world.get_location('GS Lost Woods Bean Patch Near Stage'), lambda state: state.has_bottle() and (state.can_child_attack() or (not world.shuffle_scrubs and state.has('Buy Deku Shield'))) and (state.can_leave_forest() or state.has('Kokiri Sword') or state.has_sticks() or state.has('Boomerang') or state.has_explosives() or state.has('Buy Bottle Bug')))
+    set_rule(world.get_location('GS Lost Woods Bean Patch Near Bridge'), lambda state: state.has_bottle() and state.can_child_attack() and (state.can_leave_forest() or state.can_child_melee_attack() or state.has('Boomerang') or state.has_explosives() or state.has('Buy Bottle Bug')))
+    set_rule(world.get_location('GS Lost Woods Bean Patch Near Stage'), lambda state: state.has_bottle() and (state.can_child_attack() or (not world.shuffle_scrubs and state.has('Buy Deku Shield'))) and (state.can_leave_forest() or state.can_child_melee_attack() or state.has('Boomerang') or state.has_explosives() or state.has('Buy Bottle Bug')))
     set_rule(world.get_location('GS Lost Woods Above Stage'), lambda state: state.has('Magic Bean') and state.nighttime())
     set_rule(world.get_location('GS Sacred Forest Meadow'), lambda state: state.has('Progressive Hookshot') and state.is_adult() and state.nighttime())
     set_rule(world.get_location('GS Hyrule Field near Kakariko'), lambda state: (state.has('Boomerang') and state.has_explosives()) or (state.has('Progressive Hookshot') and state.is_adult()))
@@ -364,8 +364,8 @@ def dung_rules_dt0(world):
     set_rule(world.get_entrance('Deku Tree Basement Path'), lambda state: state.has_slingshot() and (state.has_sticks() or (state.has('Dins Fire') and state.has('Magic Meter'))))
     set_rule(world.get_entrance('Deku Tree Slingshot Passage'), lambda state: state.has('Buy Deku Shield'))
 
-    set_rule(world.get_location('Queen Gohma Heart'), lambda state: state.has('Buy Deku Shield') and (state.has('Kokiri Sword') or state.has_sticks()))
-    set_rule(world.get_location('Queen Gohma'), lambda state: state.has('Buy Deku Shield') and (state.has('Kokiri Sword') or state.has_sticks()))
+    set_rule(world.get_location('Queen Gohma Heart'), lambda state: state.has('Buy Deku Shield') and state.can_child_melee_attack())
+    set_rule(world.get_location('Queen Gohma'), lambda state: state.has('Buy Deku Shield') and state.can_child_melee_attack())
 
 	# GS
     set_rule(world.get_location('GS Deku Tree Basement Back Room'), lambda state: state.has('Boomerang') and (state.has_explosives()))
@@ -378,9 +378,9 @@ def dung_rules_dc0(world):
 	# Dodongo's Cavern Vanilla
     set_rule(world.get_entrance('Dodongos Cavern Rocks'), lambda state: state.can_blast_or_smash() or state.has('Progressive Strength Upgrade') or state.is_adult())
     set_rule(world.get_entrance('Dodongos Cavern Lobby'), lambda state: state.can_blast_or_smash() or state.has('Progressive Strength Upgrade'))
-    set_rule(world.get_entrance('Dodongos Cavern Left Door'), lambda state: (state.is_adult() or ((state.has_sticks() or (state.has('Dins Fire') and state.has('Magic Meter'))) and (state.has_slingshot() or state.has_sticks() or state.has_explosives() or state.has('Kokiri Sword')))) and (state.has_explosives() or state.has('Progressive Strength Upgrade') or (state.has('Dins Fire') and state.has('Magic Meter')) or (state.has_bow() and state.is_adult())))
-    set_rule(world.get_location('Dodongos Cavern Compass Chest'), lambda state: state.is_adult() or ((state.has_sticks() or (state.has('Dins Fire') and state.has('Magic Meter'))) and (state.has_slingshot() or state.has_sticks() or state.has_explosives() or state.has('Kokiri Sword'))))
-    set_rule(world.get_location('DC Deku Scrub Deku Sticks'), lambda state: (state.is_adult() or (state.has_slingshot() or state.has_sticks() or state.has_explosives() or state.has('Kokiri Sword'))))
+    set_rule(world.get_entrance('Dodongos Cavern Left Door'), lambda state: (state.is_adult() or ((state.has_sticks() or (state.has('Dins Fire') and state.has('Magic Meter'))) and (state.has_slingshot() or state.has_explosives() or state.can_child_melee_attack()))) and (state.has_explosives() or state.has('Progressive Strength Upgrade') or (state.has('Dins Fire') and state.has('Magic Meter')) or (state.has_bow() and state.is_adult())))
+    set_rule(world.get_location('Dodongos Cavern Compass Chest'), lambda state: state.is_adult() or ((state.has_sticks() or (state.has('Dins Fire') and state.has('Magic Meter'))) and (state.has_slingshot() or state.has_explosives() or state.can_child_melee_attack())))
+    set_rule(world.get_location('DC Deku Scrub Deku Sticks'), lambda state: (state.is_adult() or (state.has_slingshot() or state.has_explosives() or state.can_child_melee_attack())))
 
     set_rule(world.get_entrance('Dodongos Cavern Slingshot Target'), lambda state: (state.has_slingshot() and (state.has_explosives() or state.has('Progressive Strength Upgrade'))) or ((state.has_bow() or state.has('Hover Boots') or state.has('Progressive Hookshot', 2) or world.logic_dc_jump) and state.is_adult()))
     set_rule(world.get_location('DC Deku Scrub Deku Nuts'), lambda state: state.can_blast_or_smash())
@@ -389,18 +389,18 @@ def dung_rules_dc0(world):
     set_rule(world.get_entrance('Dodongos Cavern Bomb Drop'), lambda state: state.has_explosives())
 
     # Boss
-    set_rule(world.get_location('King Dodongo'), lambda state: (state.has_bombs() or state.has('Progressive Strength Upgrade')) and (state.is_adult() or state.has_sticks() or state.has('Kokiri Sword')))
-    set_rule(world.get_location('King Dodongo Heart'), lambda state: (state.has_bombs() or state.has('Progressive Strength Upgrade')) and (state.is_adult() or state.has_sticks() or state.has('Kokiri Sword')))
+    set_rule(world.get_location('King Dodongo'), lambda state: (state.has_bombs() or state.has('Progressive Strength Upgrade')) and (state.is_adult() or state.can_child_melee_attack()))
+    set_rule(world.get_location('King Dodongo Heart'), lambda state: (state.has_bombs() or state.has('Progressive Strength Upgrade')) and (state.is_adult() or state.can_child_melee_attack()))
 
     # GS
-    set_rule(world.get_location('GS Dodongo\'s Cavern East Side Room'), lambda state: state.has_explosives() or state.is_adult() or state.has_slingshot() or state.has('Boomerang') or state.has_sticks() or state.has('Kokiri Sword'))
+    set_rule(world.get_location('GS Dodongo\'s Cavern East Side Room'), lambda state: state.has_explosives() or state.is_adult() or state.has_slingshot() or state.has('Boomerang') or state.can_child_melee_attack())
     set_rule(world.get_location('GS Dodongo\'s Cavern Alcove Above Stairs'), lambda state: (state.has('Progressive Hookshot') and state.is_adult()) or (state.has('Boomerang') and (state.has_explosives() or state.has('Progressive Strength Upgrade'))))
     set_rule(world.get_location('GS Dodongo\'s Cavern Scarecrow'), lambda state: state.is_adult() and ( (state.has('Progressive Hookshot') and state.has_ocarina()) or state.has('Progressive Hookshot', 2) ))
 
 def dung_rules_jb0(world):
     set_rule(world.get_entrance('Jabu Jabus Belly Ceiling Switch'), lambda state: state.has_slingshot() or state.has_explosives() or state.has('Boomerang'))
     set_rule(world.get_entrance('Jabu Jabus Belly Tentacles'), lambda state: state.has('Boomerang'))
-    set_rule(world.get_entrance('Jabu Jabus Belly Octopus'), lambda state: state.has_sticks() or state.has('Kokiri Sword'))
+    set_rule(world.get_entrance('Jabu Jabus Belly Octopus'), lambda state: state.can_child_melee_attack())
 
 def dung_rules_fot0(world):
 	# Forest Temple Vanilla
