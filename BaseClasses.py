@@ -367,6 +367,9 @@ class CollectionState(object):
     def can_shoot_fire_arrows(self):
         return self.has_bow() and self.has('Fire Arrows') and self.has('Magic Meter') and self.is_adult()
 
+    def can_shoot_light_arrows(self):
+        return self.has_bow() and self.has('Light Arrows') and self.has('Magic Meter') and self.is_adult()
+
     def has_slingshot(self):
         return self.has('Slingshot')
 
