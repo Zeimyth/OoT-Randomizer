@@ -347,7 +347,7 @@ class CollectionState(object):
                 self.has_slingshot() or \
                 self.has('Boomerang') or \
                 self.has_explosives() or \
-                (self.has('Dins Fire') and self.has('Magic Meter'))
+                self.can_cast_dins_fire()
 
     def can_stun_deku(self):
         return  self.is_adult() or \
@@ -417,6 +417,9 @@ class CollectionState(object):
     def can_see_with_lens(self):
         return ((self.has('Magic Meter') and self.has('Lens of Truth')) or self.world.logic_lens != 'all')
 
+    def can_cast_dins_fire(self):
+        return self.has('Magic Meter') and self.has('Dins Fire')
+
     def has_GoronTunic(self):
         return (self.has('Goron Tunic') or self.has('Buy Goron Tunic'))
 
@@ -454,7 +457,7 @@ class CollectionState(object):
         return self.has('Gold Gauntlets') and self.is_adult()
 
     def has_fire_source(self):
-        return ((self.has('Dins Fire') or (self.has_bow() and self.has('Fire Arrows') and self.is_adult())) and self.has('Magic Meter'))
+        return self.can_cast_dins_fire() or (self.has_bow() and self.has('Fire Arrows') and self.is_adult() and self.has('Magic Meter'))
 
     def guarantee_hint(self):
         if(self.world.hints == 'mask'):
