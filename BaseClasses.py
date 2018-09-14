@@ -349,11 +349,14 @@ class CollectionState(object):
                 self.has_explosives() or \
                 self.can_cast_dins_fire()
 
+    def has_deku_shield(self):
+        return self.has('Buy Deku Shield') or self.has('Deku Shield')
+
     def can_stun_deku(self):
         return  self.is_adult() or \
                 self.can_child_attack() or \
                 self.has_nuts() or \
-                self.has('Buy Deku Shield')
+                self.has_deku_shield()
 
     def has_nuts(self):
         return self.has('Buy Deku Nut (5)') or self.has('Buy Deku Nut (10)') or self.has('Deku Nut Drop')

@@ -82,7 +82,7 @@ def global_rules(world):
     # overworld requirements
     set_rule(world.get_location('Deku Baba Sticks'), lambda state: (state.has('Kokiri Sword') and state.has('Buy Deku Shield')) or (world.open_forest and (state.is_adult() or state.has('Kokiri Sword') or state.has('Boomerang'))))
     set_rule(world.get_location('Deku Baba Nuts'), lambda state: (state.has('Kokiri Sword') and state.has('Buy Deku Shield')) or (world.open_forest and (state.is_adult() or state.has_slingshot() or state.has_sticks() or state.has_explosives() or state.has('Kokiri Sword') or (state.has('Dins Fire') and state.has('Magic Meter')))))
-    set_rule(world.get_entrance('Deku Tree'), lambda state: (state.has('Kokiri Sword') and state.has('Buy Deku Shield')) or world.open_forest)
+    set_rule(world.get_entrance('Deku Tree'), lambda state: (state.has('Kokiri Sword') and state.has_deku_shield()) or world.open_forest)
     set_rule(world.get_entrance('Lost Woods Bridge'), lambda state: state.can_leave_forest())
     set_rule(world.get_location('Skull Kid'), lambda state: state.can_play('Sarias Song'))
     set_rule(world.get_location('Ocarina Memory Game'), lambda state: (not world.logic_no_memory_game) and state.has_ocarina())
@@ -290,17 +290,17 @@ def global_rules(world):
     set_rule(world.get_location('GS Zora River Tree'), lambda state: state.can_child_attack())
     set_rule(world.get_location('HF Grotto Deku Scrub Piece of Heart'), lambda state: state.can_stun_deku()) 
     set_rule(world.get_entrance('Zora River Storms Grotto'), lambda state: state.can_play('Song of Storms') and state.can_stun_deku())
-    set_rule(world.get_entrance('Meadow Storms Grotto Child Access'), lambda state: state.can_play('Song of Storms') and (state.can_child_attack() or state.has_nuts() or state.has('Buy Deku Shield')))
+    set_rule(world.get_entrance('Meadow Storms Grotto Child Access'), lambda state: state.can_play('Song of Storms') and (state.can_child_attack() or state.has_nuts() or state.has_deku_shield()))
     set_rule(world.get_entrance('Meadow Storms Grotto Adult Access'), lambda state: state.can_play('Song of Storms'))
     set_rule(world.get_entrance('Lake Hylia Grotto'), lambda state: state.can_stun_deku())
     set_rule(world.get_location('LW Deku Scrub Deku Nuts'), lambda state: state.can_stun_deku()) 
     set_rule(world.get_location('LW Deku Scrub Deku Sticks'), lambda state: state.can_stun_deku()) 
     set_rule(world.get_location('LW Deku Scrub Deku Stick Upgrade'), lambda state: state.can_stun_deku()) 
     set_rule(world.get_entrance('Desert Colossus Grotto'), lambda state: state.has('Progressive Strength', 2) and state.is_adult())
-    set_rule(world.get_location('DMC Deku Scrub Bombs'), lambda state: state.can_blast_or_smash() and (state.can_child_attack() or state.has_nuts() or state.has('Buy Deku Shield')))
+    set_rule(world.get_location('DMC Deku Scrub Bombs'), lambda state: state.can_blast_or_smash() and (state.can_child_attack() or state.has_nuts() or state.has_deku_shield()))
     set_rule(world.get_entrance('DMC Hammer Grotto'), lambda state: state.has('Hammer') and state.is_adult())
     set_rule(world.get_entrance('Goron City Grotto'), lambda state: state.is_adult() and ((state.can_play('Song of Time') and (world.difficulty != 'ohko' or state.has_GoronTunic() or state.has('Progressive Hookshot', 2) or (state.has('Nayrus Love') and state.has('Magic Meter')))) or (world.difficulty != 'ohko' and state.has_GoronTunic() and state.has('Progressive Hookshot')) or (state.has('Nayrus Love') and state.has('Magic Meter') and state.has('Progressive Hookshot'))))
-    set_rule(world.get_entrance('Lon Lon Grotto'), lambda state: state.can_child_attack() or state.has_nuts() or state.has('Buy Deku Shield'))
+    set_rule(world.get_entrance('Lon Lon Grotto'), lambda state: state.can_child_attack() or state.has_nuts() or state.has_deku_shield())
     set_rule(world.get_entrance('Gerudo Valley Storms Grotto'), lambda state: state.can_play('Song of Storms'))
 
 
@@ -362,10 +362,10 @@ def set_shop_rules(world):
 def dung_rules_dt0(world):
 	# Deku Tree Vanilla
     set_rule(world.get_entrance('Deku Tree Basement Path'), lambda state: state.has_slingshot() and (state.has_sticks() or state.can_cast_dins_fire()))
-    set_rule(world.get_entrance('Deku Tree Slingshot Passage'), lambda state: state.has('Buy Deku Shield'))
+    set_rule(world.get_entrance('Deku Tree Slingshot Passage'), lambda state: state.has_deku_shield())
 
-    set_rule(world.get_location('Queen Gohma Heart'), lambda state: state.has('Buy Deku Shield') and state.can_child_melee_attack())
-    set_rule(world.get_location('Queen Gohma'), lambda state: state.has('Buy Deku Shield') and state.can_child_melee_attack())
+    set_rule(world.get_location('Queen Gohma Heart'), lambda state: state.has_deku_shield() and state.can_child_melee_attack())
+    set_rule(world.get_location('Queen Gohma'), lambda state: state.has_deku_shield() and state.can_child_melee_attack())
 
 	# GS
     set_rule(world.get_location('GS Deku Tree Basement Back Room'), lambda state: state.has('Boomerang') and (state.has_explosives()))
