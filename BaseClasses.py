@@ -364,6 +364,9 @@ class CollectionState(object):
     def has_bow(self):
         return self.has('Bow')
 
+    def can_shoot_fire_arrows(self):
+        return self.has_bow() and self.has('Fire Arrows') and self.has('Magic Meter') and self.is_adult()
+
     def has_slingshot(self):
         return self.has('Slingshot')
 
@@ -457,7 +460,7 @@ class CollectionState(object):
         return self.has('Gold Gauntlets') and self.is_adult()
 
     def has_fire_source(self):
-        return self.can_cast_dins_fire() or (self.has_bow() and self.has('Fire Arrows') and self.is_adult() and self.has('Magic Meter'))
+        return self.can_cast_dins_fire() or self.can_shoot_fire_arrows()
 
     def guarantee_hint(self):
         if(self.world.hints == 'mask'):
