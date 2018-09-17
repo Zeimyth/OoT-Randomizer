@@ -80,8 +80,8 @@ def global_rules(world):
     dung_rules_gc0(world)
 
     # overworld requirements
-    set_rule(world.get_location('Deku Baba Sticks'), lambda state: (state.has('Kokiri Sword') and state.has('Buy Deku Shield')) or (world.open_forest and (state.is_adult() or state.has('Kokiri Sword') or state.has('Boomerang'))))
-    set_rule(world.get_location('Deku Baba Nuts'), lambda state: (state.has('Kokiri Sword') and state.has('Buy Deku Shield')) or (world.open_forest and (state.is_adult() or state.has_slingshot() or state.has_sticks() or state.has_explosives() or state.has('Kokiri Sword') or (state.has('Dins Fire') and state.has('Magic Meter')))))
+    set_rule(world.get_location('Deku Baba Sticks'), lambda state: (state.has('Kokiri Sword') and state.has_deku_shield()) or (world.open_forest and (state.is_adult() or state.has('Kokiri Sword') or state.has('Boomerang'))))
+    set_rule(world.get_location('Deku Baba Nuts'), lambda state: (state.has('Kokiri Sword') and state.has_deku_shield()) or (world.open_forest and (state.is_adult() or state.has_slingshot() or state.has_explosives() or state.can_child_melee_attack() or state.can_cast_dins_fire())))
     set_rule(world.get_entrance('Deku Tree'), lambda state: (state.has('Kokiri Sword') and state.has_deku_shield()) or world.open_forest)
     set_rule(world.get_entrance('Lost Woods Bridge'), lambda state: state.can_leave_forest())
     set_rule(world.get_location('Skull Kid'), lambda state: state.can_play('Sarias Song'))
@@ -239,7 +239,7 @@ def global_rules(world):
     set_rule(world.get_location('GS Kokiri Bean Patch'), lambda state: state.has_bottle() and state.can_child_attack() and (state.can_leave_forest() or state.can_child_melee_attack() or state.has('Boomerang') or state.has_explosives() or state.has('Buy Bottle Bug')))
     set_rule(world.get_location('GS Kokiri House of Twins'), lambda state: state.has('Progressive Hookshot') and state.is_adult() and state.nighttime())
     set_rule(world.get_location('GS Lost Woods Bean Patch Near Bridge'), lambda state: state.has_bottle() and state.can_child_attack() and (state.can_leave_forest() or state.can_child_melee_attack() or state.has('Boomerang') or state.has_explosives() or state.has('Buy Bottle Bug')))
-    set_rule(world.get_location('GS Lost Woods Bean Patch Near Stage'), lambda state: state.has_bottle() and (state.can_child_attack() or (not world.shuffle_scrubs and state.has('Buy Deku Shield'))) and (state.can_leave_forest() or state.can_child_melee_attack() or state.has('Boomerang') or state.has_explosives() or state.has('Buy Bottle Bug')))
+    set_rule(world.get_location('GS Lost Woods Bean Patch Near Stage'), lambda state: state.has_bottle() and (state.can_child_attack() or (not world.shuffle_scrubs and state.has_deku_shield())) and (state.can_leave_forest() or state.can_child_melee_attack() or state.has('Boomerang') or state.has_explosives() or state.has('Buy Bottle Bug')))
     set_rule(world.get_location('GS Lost Woods Above Stage'), lambda state: state.has('Magic Bean') and state.nighttime())
     set_rule(world.get_location('GS Sacred Forest Meadow'), lambda state: state.has('Progressive Hookshot') and state.is_adult() and state.nighttime())
     set_rule(world.get_location('GS Hyrule Field near Kakariko'), lambda state: (state.has('Boomerang') and state.has_explosives()) or (state.has('Progressive Hookshot') and state.is_adult()))
