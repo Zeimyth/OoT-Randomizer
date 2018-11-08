@@ -160,7 +160,7 @@ hintTable = {
     '30 Gold Skulltula Reward':                              ("slaying #30 Gold Skulltulas# reveals", None, 'alwaysLocation'),
     '40 Gold Skulltula Reward':                              ("slaying #40 Gold Skulltulas# reveals", None, 'alwaysLocation'),
     '50 Gold Skulltula Reward':                              ("slaying #50 Gold Skulltulas# reveals", None, 'alwaysLocation'),
-    'Ocarina of Time':                                       ("They say the #treasure thrown by Princess Zelda# is", None, 'alwaysLocation'),
+    'Ocarina of Time':                                       ("the #treasure thrown by Princess Zelda# is", None, 'alwaysLocation'),
     'Song from Ocarina of Time':                             ("the #Ocarina of Time# teaches", None, 'alwaysLocation'),
     'Biggoron':                                              ("#Biggoron# crafts", None, 'alwaysLocation'),
     'Child Fishing':                                         ("#fishing in youth# bestows", None, 'location'),
